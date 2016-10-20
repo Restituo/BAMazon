@@ -20,7 +20,7 @@ function start(){
 //prints the items for sale and their details
 connection.query('SELECT * FROM Products', function(err, res){
   if(err) throw err;
-
+  // console.log(res);
   console.log('_.~"~._.~"~._.~Welcome to BAMazon~._.~"~._.~"~._')
   console.log('----------------------------------------------------------------------------------------------------')
 
@@ -65,7 +65,7 @@ connection.query('SELECT * FROM Products', function(err, res){
         console.log("Success! Your total is $" + grandTotal + ". Your item(s) will be shipped to you in 3-5 business days.");
 
         //after purchase, updates quantity in table
-        connection.query('UPDATE Products SET ? WHERE ?', [
+        this.query('UPDATE Products SET ? WHERE ?', [
           {StockQuantity: res[whatToBuy].StockQuantity - howMuchToBuy},
           {ItemID: whatToBuy}
           ], function(err, result){
