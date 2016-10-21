@@ -10,12 +10,6 @@ var connection = mysql.createConnection({
   database: "Bamazon"
 })
 
-//check connection
-// connection.connect(function(err) {
-//   if(err) throw err;
-//   console.log("connected as id " + connection.threadId);
-// })
-
 function start(){
 //prints the items for sale and their details
 connection.query('SELECT * FROM Products', function(err, res){
@@ -65,19 +59,19 @@ connection.query('SELECT * FROM Products', function(err, res){
         console.log("Success! Your total is $" + grandTotal + ". Your item(s) will be shipped to you in 3-5 business days.");
 
         //after purchase, updates quantity in table
-        this.query('UPDATE Products SET ? WHERE ?', [
-          {StockQuantity: res[whatToBuy].StockQuantity - howMuchToBuy},
-          {ItemID: whatToBuy}
-          ], function(err, result){
+        connection.query("UPDATE Products SET ? WHERE ?", [
+        {StockQuantity: (res[whatToBuy].StockQuantity - howMuchToBuy)},
+        {ItemID: ans.id}
+        ], function(err, res){
             if(err) throw err;
-            console.log(result);
-        })
-        reprompt()
+            // console.log(res);
+        });
       } else{
         console.log("Sorry, there's not enough in stock!");
-        reprompt();
       }
-    });
+
+      reprompt();
+    })
 })
 }
 
