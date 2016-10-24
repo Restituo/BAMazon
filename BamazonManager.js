@@ -15,7 +15,7 @@ function start(){
     type: "list",
     name: "doThing",
     message: "What would you like to do?",
-    choices: ["View Products for Sale", "View Low Inventory", "Add to Inventory", "Add New Product", "Remove Product","End Session"]
+    choices: ["View Products for Sale", "View Low Inventory", "Add to Inventory", "Add New Product","End Session"]
   }]).then(function(ans){
      switch(ans.doThing){
       case "View Products for Sale": viewProducts();
@@ -25,8 +25,6 @@ function start(){
       case "Add to Inventory": addToInventory();
       break;
       case "Add New Product": addNewProduct();
-      break;
-      case "Remove Product": removeProduct();
       break;
       case "End Session": console.log('Bye!');
     }
@@ -167,41 +165,6 @@ function addNewProduct(){
     })
     start();
   });
-}
-
-function removeProduct(){
-  //grab products to push into array
-  connection.query('SELECT * FROM Products', function(err, res){
-    if(err) throw err;
-
-    var products = []
-      for(var i = 0; i<res.length; i++){
-        products.push(res[i].ProductName);
-      }
-
-  inquirer.prompt([
-  {
-    type: "list",
-    name: "removeThis",
-    message: "Which item would you like to remove?",
-    choices: products
-  }, {
-    type: "confirm",
-    name: "confirm",
-    message: "Are you sure?",
-    default: "true"
-  }]).then(function(ans){
-      if(ans.confirm){
-        connection.query('DELETE FROM Products WHERE ?', {
-          ProductName: ans.removeThis
-        }, function(err, res){
-          if(err) throw err;
-          console.log('You deleted ' + ans.confirm + " from your store.");
-        })
-      }
-    start();
-  });
-  })
 }
 
 start();
