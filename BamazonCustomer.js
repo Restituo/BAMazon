@@ -52,20 +52,38 @@ connection.query('SELECT * FROM Products', function(err, res){
     ]).then(function(ans){
       var whatToBuy = (ans.id)-1;
       var howMuchToBuy = parseInt(ans.qty);
-      var grandTotal = (res[whatToBuy].Price)*howMuchToBuy;
+      var grandTotal = ((res[whatToBuy].Price)*howMuchToBuy).toFixed(2);
 
       //check if quantity is sufficient
       if(res[whatToBuy].StockQuantity >= howMuchToBuy){
-        console.log("Success! Your total is $" + grandTotal + ". Your item(s) will be shipped to you in 3-5 business days.");
-
-        //after purchase, updates quantity in table
+        //after purchase, updates quantity in Products
         connection.query("UPDATE Products SET ? WHERE ?", [
         {StockQuantity: (res[whatToBuy].StockQuantity - howMuchToBuy)},
         {ItemID: ans.id}
         ], function(err, res){
             if(err) throw err;
-            // console.log(res);
+            console.log("Success! Your total is $" + grandTotal + ". Your item(s) will be shipped to you in 3-5 business days.");
         });
+
+        connection.query("SELECT * FROM Departments", function(err, deptRes){
+          var index;
+          for(var i = 0; i < deptRes.length; i++){
+            if(deptRes[i].DepartmentName === res[whatToBuy].DepartmentName){
+              index = i;
+            }
+          }
+
+          //updates totalSales in departments table
+          connection.query("UPDATE Departments SET ? WHERE ?", [
+          {TotalSales: deptRes[index].TotalSales + grandTotal},
+          {DepartmentName: res[whatToBuy].DepartmentName}
+          ], function(err, deptRes){
+              if(err) throw err;
+              //console.log("Updated Dept Sales.");
+          });
+        });
+
+        //adds purchase to product sales
       } else{
         console.log("Sorry, there's not enough in stock!");
       }
