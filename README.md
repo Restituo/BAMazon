@@ -57,29 +57,11 @@ Created during Week 12 of Rutgers Coding Bootcamp. The goal was to create an Ama
 
 ## Demo Videos
 
-* BamazonCustomer.js
-  
-  embedSWF('BamazonCust', {
-        src: 'BamazonCustomer.swf',
-        width: 640,
-        height: 320
-    });
+* BamazonCustomer.js (https://www.youtube.com/watch?v=p-QBusgtjKE)
 
-* BamazonManager.js 
+* BamazonManager.js (https://www.youtube.com/watch?v=Go828nrwaLY)
 
-  embedSWF('BamazonMgr', {
-        src: 'BamazonManager.swf',
-        width: 640,
-        height: 320
-    });
-
-* ExecutiveManager.js 
-
-  embedSWF('BamazonExec', {
-        src: 'BamazonExecutive.swf',
-        width: 640,
-        height: 320
-    });
+* ExecutiveManager.js (https://www.youtube.com/watch?v=W6P2YpXGDq8)
 
 ## Technologies used
 - Node.js
