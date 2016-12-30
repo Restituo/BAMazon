@@ -9,7 +9,10 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "customer": "node BamazonCustomer.js",
+    "exective": "node BamazonExecutive.js",
+    "manager": "node BamazonManager.js"
   },
   "repository": {
     "type": "git",

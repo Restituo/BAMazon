@@ -4,6 +4,14 @@ Created during Week 12 of Rutgers Coding Bootcamp. The goal was to create an Ama
 
 ## Getting Started
 
+- Clone repo.
+- Run command in Terminal or Gitbash 'npm install'
+- Run command depending which mode you would like to be on:
+    * Customer - 'npm run customer'
+    * Manager - 'npm run manager'
+    * Exective - 'npm run exective'
+- Run 'ctrl + c' to exit each mode
+
 ### What Each JavaScript Does
 
 1. `BamazonCustomer.js`
@@ -65,13 +73,14 @@ Created during Week 12 of Rutgers Coding Bootcamp. The goal was to create an Ama
 
 ## Technologies used
 - Node.js
-- npm inquirer (https://www.npmjs.com/package/inquirer)
-- npm mysql (https://www.npmjs.com/package/mysql)
+- Inquire NPM Package (https://www.npmjs.com/package/inquirer)
+- MYSQL NPM Package (https://www.npmjs.com/package/mysql)
 
 ### Prerequisites
 
 ```
-See package.json
+- Node.js - Download the latest version of Node https://nodejs.org/en/
+- Create a MYSQL database called 'Bamazon', reference schema.sql
 ```
 
 ## Built With
